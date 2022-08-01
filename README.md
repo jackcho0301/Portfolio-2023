@@ -2,7 +2,7 @@
 
 ## Calendar Web Application 
 ### JavaScript & LAMP Stack Project (Linux, Apache HTTP Server, MySQL, PHP)
-[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/main/Calendar(LAMP))
+[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/master/Calendar(LAMP))
 #### Features:
 - Users can log in and add/delete/modify events on the calendar
 - Simple to-do feature is embedded to the application
@@ -14,7 +14,7 @@ The project is deployed to AWS EC2 Linux instance: http://ec2-15-164-234-77.ap-n
 
 ## Movie Trailer Browser
 ### MERN Stack Project (MongoDB, Express.js, React.js, Node.js)
-[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/main/Movie-Trailer-Browser(MERN))
+[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/master/Movie-Trailer-Browser(MERN))
 #### Features:
 - The application is powered by The Movie Database (TMDB) external APIs
 - User is able to save and unsave movies as favorites
@@ -37,7 +37,7 @@ The project is deployed to AWS EC2 Linux instance: http://ec2-15-164-234-77.ap-n
 
 ## Housemate Chores Application
 ### Swift (iOS) Project Code Sample
-[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/main/Housemate-Chores-App(Swift))
+[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/master/Housemate-Chores-App(Swift))
 
 
 
@@ -45,7 +45,7 @@ The project is deployed to AWS EC2 Linux instance: http://ec2-15-164-234-77.ap-n
 
 ## Chat Server
 ### Node.js and Socket.IO Project
-[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/main/Chat-Server(Node.js))
+[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/master/Chat-Server(Node.js))
 
 
 
@@ -53,7 +53,7 @@ The project is deployed to AWS EC2 Linux instance: http://ec2-15-164-234-77.ap-n
 
 ## Text Analysis of Jane Austen and Louisa May Alcott novels
 ### Python Data Analysis Project
-[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/main/Text-Analysis(Python))
+[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/master/Text-Analysis(Python))
 
 
 

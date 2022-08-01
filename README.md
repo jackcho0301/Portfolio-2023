@@ -2,7 +2,7 @@
 
 ## Calendar Web Application 
 ### JavaScript & LAMP Stack Project (Linux, Apache HTTP Server, MySQL, PHP)
-[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/main/Calendar(LAMP))
+[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/master/Calendar(LAMP))
 #### Features:
 - Users can log in and add/delete/modify events on the calendar
 - Simple to-do feature is embedded to the application
@@ -14,7 +14,7 @@ The project is deployed to AWS EC2 Linux instance: http://ec2-15-164-234-77.ap-n
 
 ## Movie Trailer Browser
 ### MERN Stack Project (MongoDB, Express.js, React.js, Node.js)
-[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/main/Movie-Trailer-Browser(MERN))
+[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/master/Movie-Trailer-Browser(MERN))
 #### Features:
 - The application is powered by The Movie Database (TMDB) external APIs
 - User is able to save and unsave movies as favorites
@@ -31,29 +31,53 @@ The project is deployed to AWS EC2 Linux instance: http://ec2-15-164-234-77.ap-n
 > npm start
 5. Open a new terminal window and change directory to backend/ subfolder of the project
 > cd Portfolio-2022/Movie-Trailer-Browser(MERN)/backend
-6. Run **node app.js** to start the Node.js web server
+6. Run **npm install** to install dependencies
+> **npm install**
+7. Run **node app.js** to start the web server
 > node app.js
+8. Open http://localhost:3000 in the browser to use the application
 
 
 ## Housemate Chores Application
 ### Swift (iOS) Project Code Sample
-[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/main/Housemate-Chores-App(Swift))
+[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/master/Housemate-Chores-App(Swift))
 
-
+This is a code snippet from an iOS application project. The code achieves the following:
+- Import iOS Calendar library made by WenchaoD (https://github.com/WenchaoD/FSCalendar)
+- Clicking on a specific cell of the calendar allows the users to create and delete events
+- Connect with Firebase Realtime Database for data persistence
+- Display all events created by a fellow group of housemates (and ignore events made by users that are not housemates)
 
 
 
 ## Chat Server
 ### Node.js and Socket.IO Project
-[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/main/Chat-Server(Node.js))
+[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/master/Chat-Server(Node.js))
+#### Features:
+- Users can create chat rooms with an arbitrary room name
+- Users can join an arbitrary chat room
+- The chat room displays all users currently in the room
+- A password-protected private room can be created
+- Creators of chat rooms can temporarily kick others out of the room
+- Creators of chat rooms can permanently ban users from joining that particular room
+- Users can send private messages to another user in the same room 
+- A user is able to block another user from sending a message
 
-
+#### Instruction:
+1. Clone this repository
+2. Open terminal window and change the directory to the project root folder 
+> cd Portfolio-2022/Chat-Server(Node.js)
+3. Run **npm install** to install dependencies
+> npm install
+4. Run **node chat-server.js** to start the web server
+> node chat-server.js
+6. Open http://localhost:3456 in the browser to use the application
 
 
 
 ## Text Analysis of Jane Austen and Louisa May Alcott novels
 ### Python Data Analysis Project
-[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/main/Text-Analysis(Python))
+[Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/master/Text-Analysis(Python))
 
 
 

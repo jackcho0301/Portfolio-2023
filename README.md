@@ -78,7 +78,5 @@ This is a code snippet from an iOS application project. The code achieves the fo
 ## Text Analysis of Jane Austen and Louisa May Alcott novels
 ### Python Data Analysis Project
 [Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/master/Text-Analysis(Python))
-
-
-
+The code analyzes five novels by Jane Austen and five novels by Louisa May Alcott and run k-means algorithm on two different feature sets: "positive-sentiment" words and stopwords. Using these two feature sets resulted in classifying the corpus to the two authors with high accuracy.
 

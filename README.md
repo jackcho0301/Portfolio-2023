@@ -35,7 +35,7 @@ The project is deployed to AWS EC2 Linux instance: http://ec2-15-164-234-77.ap-n
 > **npm install**
 7. Run **node app.js** to start the web server
 > node app.js
-> 5. Open http://localhost:3000 in the browser to use the application
+8. Open http://localhost:3000 in the browser to use the application
 
 
 ## Housemate Chores Application
@@ -69,8 +69,9 @@ This is a code snippet from an iOS application project. The code achieves the fo
 > cd Portfolio-2022/Chat-Server(Node.js)
 3. Run **npm install** to install dependencies
 > npm install
-4. Run **chat-server.js** to start the web server
-5. Open http://localhost:3456 in the browser to use the application
+4. Run **node chat-server.js** to start the web server
+> node chat-server.js
+6. Open http://localhost:3456 in the browser to use the application
 
 
 

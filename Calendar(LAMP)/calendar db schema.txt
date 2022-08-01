@@ -1,0 +1,18 @@
+| users | CREATE TABLE `users` (
+  `username` varchar(50) NOT NULL,
+  `hashed_password` char(61) NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
+
+
+
+| events | CREATE TABLE `events` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `date` date NOT NULL,
+  `hour` tinyint(4) NOT NULL,
+  `todo` varchar(200) DEFAULT NULL,
+  `shared_username` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 |

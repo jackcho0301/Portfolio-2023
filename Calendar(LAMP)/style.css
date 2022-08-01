@@ -1,0 +1,46 @@
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body {
+    background-color: #F9F9F7;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+#calendar-table {
+    text-align: center;
+    width: 80%;
+}
+
+#calendar-table td{
+    width:1200px;
+    height:70px;
+}
+
+#week-names-row {
+    background-color:lightblue;
+}
+
+.cells-with-events {
+    background-color: rgb(253, 255, 210);
+}
+
+.clicked-cell{
+    background: rgb(213, 255, 195);
+}
+
+#new-event-form {
+    background: rgb(213, 255, 195);
+}
+
+
+#events-display{
+    background-color: rgb(253, 255, 210);
+}
+
+#delete-todo-btn {
+    background-color: rgb(255, 209, 129);
+}

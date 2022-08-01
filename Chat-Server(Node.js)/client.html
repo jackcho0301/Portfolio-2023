@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <title>Chat Server</title>
+   <link href="style.css" type="text/css" rel="stylesheet">
+   <style>
+      body {
+         padding-bottom: 3rem;
+         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         font-size: 14px;
+         background-color: #F9F9F7;
+      }
+
+      * {
+         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      }
+
+      /* Refered to stylesheet from https://socket.io/get-started/chat */
+      #message-form {
+         background: rgba(0, 0, 0, 0.15);
+         padding: 0.25rem;
+         position: fixed;
+         bottom: 0;
+         left: 0;
+         right: 0;
+         display: flex;
+         height: 3rem;
+         box-sizing: border-box;
+         backdrop-filter: blur(10px);
+      }
+
+      /* Refered to stylesheet from https://socket.io/get-started/chat */
+      #message-input {
+         border: none;
+         padding: 0 1rem;
+         flex-grow: 1;
+         border-radius: 2rem;
+         margin: 0.25rem;
+      }
+
+      /* Refered to stylesheet from https://socket.io/get-started/chat */
+      #message-input:focus {
+         outline: none;
+      }
+
+      /* Refered to stylesheet from https://socket.io/get-started/chat */
+      #message-btn {
+         background: #333;
+         border: none;
+         padding: 0 1rem;
+         margin: 0.25rem;
+         border-radius: 3px;
+         outline: none;
+         color: #fff;
+      }
+
+      #chat-messages {
+         /* overflow-y: scroll; */
+         /* overflow: scroll; */
+         border: 1px solid black;
+         /* width:500px;
+         height:500px; */
+         height: 400px;
+
+         /* display: flex; */
+         overflow: scroll;
+      }
+
+      #chat-messages {
+         background-color: #fff;
+      }
+
+      .message {
+         margin: 10px;
+         background-color: #fff;
+      }
+
+      .room-p {
+         /* border: 1px solid red; */
+         width: max-content;
+      }
+   </style>
+
+</head>
+
+<body>
+
+   <p id="username-display"></p>
+
+   <form id="new-room-form">
+      <label id="new-room-input-label" for="new-room-input">Create a new room: </label>
+      <input type="text" id="new-room-input" placeholder="type name of new room" required />
+      <br>
+      <label id="new-room-password-label" for="new-room-password">Optional: enter password to create a private room
+      </label>
+      <input type="password" id="new-room-password" placeholder="password" />
+      <br>
+      <input type="submit" id="new-room-btn" value="Make a new room" />
+   </form>
+
+   <div id="all-rooms"></div>
+
+   <div>
+      <p id="room-name"></p>
+      <p id="users"></p>
+   </div>
+
+   <form id="private-message-form">
+      <hr>
+      <label for="private-message-input" id="private-message-label"></label>
+      <input type="text" id="private-message-input" size="50" />
+      <input type="hidden" id="private-message-hidden" />
+      <input type="submit" value="send message privately" />
+   </form>
+
+   <br>
+
+   <form id="kick-ban-form">
+      <hr>
+      <p id="kick-ban-target"></p>
+      <input type="hidden" id="kick-ban-target-username" />
+      <button type="button" id="kick-btn">kick</button>
+      <button type="button" id="ban-btn">ban</button>
+      <br>
+      <br>
+   </form>
+
+   <form id="block-form">
+      <hr>
+      <p id="block-target"></p>
+      <input type="hidden" id="block-target-username" />
+      <button type="button" id="block-btn">block</button>
+      <br>
+      <br>
+   </form>
+
+
+   <div id="chat-messages"></div>
+
+   <form id="message-form">
+      <input type="text" id="message-input" />
+      <input type="submit" id="message-btn" value="Send" />
+   </form>
+
+
+
+   <script src="/socket.io/socket.io.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script>
+
+      //references used:
+      // https://www.youtube.com/watch?v=jD7FnbI76Hg&t=1054s
+      //referred to this for code required for single-room interaction
+
+      // https://socket.io/get-started/chat
+      //referred to this for basic socket io operation
+
+      // https://socket.io/docs/v3/rooms/
+      //reference for room related operation
+
+
+      $("#private-message-form").hide();
+      $("#kick-ban-form").hide();
+      $("#block-form").hide();
+
+      var socket = io.connect();
+
+      let username = "";
+      let room = "public";
+      let userOwnsCurrentRoom = false;
+      let arrBlockedUser = [];
+
+      let usernameSuccess = false;
+
+
+
+
+      function promptUsername() {
+         username = prompt("Please type your username:");
+         while (username == "") {
+            username = prompt("Please type your username:");
+            if (username != "") {
+               break;
+            }
+         }
+
+         socket.emit('check-for-duplicate-username', username);
+
+      }
+
+
+
+      promptUsername();
+
+      $("#username-display").html("Welcome, <strong>" + username + "</strong><hr>");
+
+
+      socket.on('is-creator', function () {
+         console.log('I am the creator');
+         userOwnsCurrentRoom = true;
+      });
+
+
+      socket.on('is-not-creator', function () {
+         console.log('I am NOT the creator');
+         userOwnsCurrentRoom = false;
+      });
+
+
+
+      //check if username exists
+      socket.on('username-already-exists', function (usernameAvailable) {
+
+         if (usernameAvailable) {
+
+            socket.emit('join-room', { username, room });
+         }
+         else {
+            alert("duplicate username exists; please choose different username");
+            username = "";
+            promptUsername();
+         }
+      });
+
+
+
+
+
+
+      //get room and users
+      socket.on('room-users', function ({ room, users }) {
+         outputRoomName(room);
+         outputUsers(users);
+      });
+
+      //add room name to DOM
+      function outputRoomName(room) {
+         $("#room-name").html("<hr>you are currently in the room: <strong>" + room + "</strong><p>List of users: (click on the username to send private message. If you created the current room, you can ban the users currently in the room.)</p>");
+      }
+
+      //add users to dom
+      function outputUsers(users) {
+         $("#users").html(`${users.map(user => `<li class="user-list">${user.username}</li>`).join('')}`);
+      }
+
+
+      //add click event for user list
+      $(document).on('click', '.user-list', function () {
+
+         let privateTarget = $(this).text();
+         if (username != privateTarget) {
+            $("#private-message-form").show();
+            $("#private-message-label").html("send private message to " + privateTarget);
+            $("#private-message-hidden").val($(this).text());
+         }
+         else {
+            $("#private-message-form").hide();
+         }
+
+
+         if (userOwnsCurrentRoom) {
+
+
+            let target = $(this).text();
+            if (username != target) {
+               $("#kick-ban-form").show();
+               $("#kick-ban-target").html("kick or ban " + target + " : ");
+               $("#kick-ban-target-username").val(target);
+            }
+            else {
+               $("#kick-ban-form").hide();
+            }
+         }
+         else {
+            $("#kick-ban-form").hide();
+         }
+
+         let blockTarget = $(this).text();
+         if (username != blockTarget) {
+            $("#block-form").show();
+            $("#block-target").html("block " + blockTarget + "?");
+            $("#block-target-username").val(blockTarget);
+
+            for (let i = 0; i < arrBlockedUser.length; ++i) {
+               if (arrBlockedUser[i] == blockTarget) {
+                  $("#block-form").hide();
+               }
+            }
+         }
+         else {
+            $("#block-form").hide();
+         }
+
+      });
+
+      $(document).on('click', '#kick-btn', function () {
+
+         let kickTarget = $("#kick-ban-target-username").val();
+         socket.emit('kick-user', kickTarget);
+         $("#private-message-form").hide();
+         $("#kick-ban-form").hide();
+
+      });
+
+      $(document).on('click', '#ban-btn', function () {
+
+         let banTarget = $("#kick-ban-target-username").val();
+         socket.emit('ban-user', banTarget);
+         $("#private-message-form").hide();
+         $("#kick-ban-form").hide();
+      });
+
+      $(document).on('click', '#block-btn', function () {
+
+         let blockTarget = $("#block-target-username").val();
+         socket.emit('block-user', blockTarget);
+         $("#private-message-form").hide();
+         $("#kick-ban-form").hide();
+         $("#block-form").hide();
+      });
+
+      socket.on('you-are-banned-alert', function () {
+         alert("you are banned from entering this room.");
+      });
+
+
+      //dom manipulation for displaying all rooms
+      function outputAllRooms(rooms) {
+         $("#all-rooms").html(`<hr><strong>List of rooms:</strong> (click on the room names to enter) ${rooms.map(room => `
+            <p class="room-p">${room}</p>
+            
+         `).join('')}`);
+      }
+
+
+
+      socket.on('update-room-users-after-user-switches-previous', function ({ previousRoom, users }) {
+         outputUsers(users);
+         $("#private-message-form").hide();
+      $("#kick-ban-form").hide();
+      $("#block-form").hide();
+      });
+
+      socket.on('update-room-users-after-user-switches-current', function ({ currentRoom, users }) {
+         outputRoomName(currentRoom);
+
+         outputUsers(users);
+         $("#private-message-form").hide();
+      $("#kick-ban-form").hide();
+      $("#block-form").hide();
+      });
+
+
+
+      //click event on roomnames 
+      $(document).on('click', '.room-p', function () {
+
+         room = $(this).text();
+         socket.emit('switch-room', room);
+         $("#private-message-form").hide();
+         $("#kick-ban-form").hide();
+      });
+
+
+
+
+      // message from server
+      const chatMessages = document.getElementById("chat-messages");
+      socket.on('message', function (message) {
+
+         let fromBlocked = false;
+         if (arrBlockedUser) {
+            for (let i = 0; i < arrBlockedUser.length; ++i) {
+               if (arrBlockedUser[i] == message.username) {
+                  // console.log(sender + " attempted to send message to you");
+                  // outputMessage("message from blocked user <em>" + sender + "</em> censored");
+                  fromBlocked = true;
+               }
+            }
+         }
+
+         if (!fromBlocked) {
+            outputMessage(message);
+         }
+         else {
+            message.text = "[<em>censored</em>]";
+            outputMessage(message);
+         }
+
+
+      });
+
+      socket.on('add-block-list', function (blockTarget) {
+         arrBlockedUser.push(blockTarget);
+      });
+
+      //output message to DOM
+      function outputMessage(message) {
+         const newDiv = document.createElement('div');
+         $(newDiv).addClass('message');
+         $(newDiv).html(`
+         <hr>
+             <p class="message-text"><strong>${message.username}</strong> <em>${message.time}</em>
+               <br>${message.text}
+            `);
+         $("#chat-messages").append(newDiv);
+      }
+
+
+      //list all rooms
+      socket.on('list-all-rooms', function (rooms) {
+
+         outputAllRooms(rooms);
+      });
+
+
+
+
+      //if user wanted to create room with existing roomname, alert error
+      socket.on('duplicate-room', function () {
+         alert("Room with duplicate name exists");
+      });
+
+      socket.on('verify-password', function (room) {
+         var enteredPassword = prompt("This room is private. Please enter password to enter this room");
+         socket.emit('password-entered', { enteredPassword, room });
+      });
+
+      socket.on('alert-wrong-password', function () {
+         alert("Incorrect password.");
+      });
+
+
+      //SEND message
+      $(document).ready(function () {
+         $("#message-form").submit(function (event) {
+            event.preventDefault();
+            var msg = document.getElementById("message-input").value;
+
+            //emit message to server
+            if (msg != "") {
+               socket.emit("chat-message", msg);
+               $("#message-input").val("");
+            }
+         });
+
+
+         //event listener for creating new room
+         $("#new-room-form").submit(function (event) {
+            event.preventDefault();
+            var newRoomName = document.getElementById("new-room-input").value;
+
+            var newRoomPassword = document.getElementById("new-room-password").value;
+
+
+
+
+            socket.emit("create-new-room", { newRoomName, username, newRoomPassword });
+
+            // socket.emit("create-new-room", newRoomName);
+            $("#new-room-password").val("");
+            $("#new-room-input").val("");
+         });
+
+
+         //event listener for sending private message
+         $("#private-message-form").submit(function (event) {
+            event.preventDefault();
+            let privateMessageTarget = $("#private-message-hidden").val();
+            let privateMessageContent = $("#private-message-input").val();
+            $("#private-message-input").val("");
+            $("#private-message-hidden").val("");
+            $("#private-message-form").hide();
+            socket.emit("send-private-message", { privateMessageTarget, privateMessageContent });
+            $("#kick-ban-form").hide();
+            $("#block-form").hide();
+         });
+
+
+
+
+      });
+
+
+   </script>
+</body>
+
+</html>

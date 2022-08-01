@@ -1,0 +1,204 @@
+html { 
+  background-color: black;
+}
+
+*{
+  font-family: sans-serif;
+  color: rgb(245, 245, 245);
+  font-size: large;
+}
+
+body{
+  padding: 0;
+  margin: 0;
+  z-index: 1;
+  background-color: black;
+  margin-bottom: 30px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+#container{
+  padding: 10px;
+  z-index: 0;
+  background-color: black;
+  text-align: center;
+  /* border: 1px solid red; */
+  width: 98%;
+  /* padding-left: 0px; */
+  /* padding-right: 10px; */
+}
+
+#container img{
+  margin: 18px;
+  margin-left: 22px;
+  width: 300px;
+  height: 450px;
+  /* border: 5px solid white; */
+  opacity: 1.0;
+  /* border: 1px solid red; */
+}
+
+#hidden-div{
+  top: 30px;
+  position: fixed;
+  height: 90%;
+  /* height: 710px; */
+  width: 60%;
+  left: 20%;
+  margin-left: auto;
+  margin-right: auto;
+  /* z-index: -1; */
+  /* display: none; */
+  background-color: rgb(50, 50, 50);
+  padding: 10px;
+  overflow-y: scroll;
+  text-align: center;
+  /* font-size: 30px; */
+}
+
+#hidden-div p{
+  text-align:left;
+  font-size: 15px;
+}
+
+#trailer {
+  width: 98%;
+  height: 67%;
+}
+
+#attribution{
+  width: 100px;
+  height: 73px;
+}
+
+#detail-title {
+  font-family: sans-serif;
+  color: rgb(245, 245, 245);
+  font-size: x-large;
+}
+
+#popular-btn, #top-rated-btn, #favorites-btn {
+  margin-top: 30px;
+  margin-right: 20px;
+  height: 40px;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: solid white;
+  border-width: 1pt;
+  cursor:pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+#close_button {
+  margin-left: 88%;
+  right: 1000px;
+  margin-bottom: 1%;
+  background-color: red;
+  color: black;
+  background-repeat:no-repeat;
+  border: solid black;
+  border-width: 1pt;
+  cursor:pointer;
+  outline: none;
+}
+
+#add-fav-button {
+  margin-left: 70%;
+  right: 1000px;
+  margin-bottom: 1%;
+  background-color: lightgreen;
+  color: black;
+  background-repeat:no-repeat;
+  border: solid black;
+  border-width: 1pt;
+  cursor:pointer;
+  outline: none;
+  width: 30%;
+}
+
+.delete-comment-btn {
+  background-color: rgb(255, 196, 0);
+  color: black;
+  width: 20%;
+  height: 20px;
+  font-size: 15px;
+  border: 1px solid red;
+  float:right;
+}
+
+#search-btn {
+  margin-top: 30px;
+  margin-right: 20px;
+  margin-left: 10px;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  height: 30px;
+  border: solid white;
+  border-width: 1pt;
+  cursor:pointer;
+  outline: none;
+}
+
+#form {
+  color:rgb(232, 232, 232);
+  text-align: center;
+}
+
+#comment-form {
+  /* border: 1px solid red; */
+  text-align: left;
+}
+
+
+#comment-input {
+  width: 400px;
+  margin-left: 2px;
+  height: 20px;
+}
+#comment-btn {
+  color: black;
+  background-color: white;
+  margin-left: 20px;
+}
+
+input:focus {
+  background-color: rgb(235, 235, 235);
+  border: 3px solid rgb(232, 232, 232);
+}
+
+input[type=text] {
+width: 25%;
+padding: 10px 20px;
+margin: 5px 0;
+box-sizing: border-box;
+color:rgb(50, 50, 50);
+}
+
+#detail-overview, #detail-runtime, #detail-release-date{
+  font-size: 15px;
+  /* overflow: scroll; */
+}
+
+#attribution-container{
+  float: right;
+}
+
+#detail-poster{
+  width: 400px;
+  height: 600px;
+}
+
+/* Hiding Scroll bar edge */
+/* reference: https://stackoverflow.com/questions/20232873/white-corners-webkit-scrollbar */
+::-webkit-scrollbar{ background: rgb(50, 50, 50); }
+::-webkit-scrollbar-corner{ background: rgb(50, 50, 50); }
+
+
+/* @media (max-width: 768px) {
+  #trailer {
+      width: 98%;
+      height: 50px;
+  }
+} */

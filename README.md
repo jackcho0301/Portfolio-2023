@@ -31,7 +31,9 @@ The project is deployed to AWS EC2 Linux instance: http://ec2-15-164-234-77.ap-n
 > npm start
 5. Open a new terminal window and change directory to backend/ subfolder of the project
 > cd Portfolio-2022/Movie-Trailer-Browser(MERN)/backend
-6. Run **node app.js** to start the Node.js web server
+6. Run **npm install** to install dependencies
+> **npm install**
+7. Run **node app.js** to start the Node.js web server
 > node app.js
 
 

@@ -2,6 +2,7 @@
 
 ## Financial Portfolio Competition Application
 ### MERN Stack Application (MongoDB, Express.js, React and Node.js) under Agile / Scrum Project Management
+[Link to the code repository](https://github.com/jackcho0301/437ChoCaiAlameddineWendler/tree/final_ui_edits)
 #### Features:
 * Users can log in as an existing user or register as a new user
 * Users can create a financial porfolio by:
@@ -10,7 +11,7 @@
 * Users can earn points based on the performance of their financial portfolios, calucated by the Return on Investment values from purchasing/selling stocks
 * Users can see their ranks with respect to other existing users' on the leaderboard
 
-[Link to the code repository](https://github.com/jackcho0301/437ChoCaiAlameddineWendler/tree/final_ui_edits)
+
 
 ## Calendar Web Application 
 ### JavaScript & LAMP Stack Project (Linux, Apache HTTP Server, MySQL, PHP)

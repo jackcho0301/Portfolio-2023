@@ -1,5 +1,17 @@
 # Portfolio-2022
 
+## Financial Portfolio Competition Application
+### MERN Stack Application (MongoDB, Express.js, React and Node.js) under Agile / Scrum Project Management
+#### Features:
+* Users can log in as an existing user or register as a new user
+* Users can create a financial porfolio by:
+    * buying shares of a specific company with real-time stock value, using Yahoo Finance API
+    * selling shares of current holdings with the updated real-time stock values
+* Users can earn points based on the performance of their financial portfolios, calucated by the Return on Investment values from purchasing/selling stocks
+* Users can see their ranks with respect to other existing users' on the leaderboard
+
+[Link to the code repository](https://github.com/jackcho0301/437ChoCaiAlameddineWendler/tree/final_ui_edits)
+
 ## Calendar Web Application 
 ### JavaScript & LAMP Stack Project (Linux, Apache HTTP Server, MySQL, PHP)
 [Link to the code repository](https://github.com/jackcho0301/Portfolio-2022/tree/master/Calendar(LAMP))
